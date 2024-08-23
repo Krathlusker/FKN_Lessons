@@ -3,44 +3,67 @@ let anton = {
   'dude': 0
 };
 
-console.log(anton)
+console.log(anton);
 
-let checks = 0;
-
-function checkBroDude (){
+function checkBroDude() {
   if (anton['bro'] == 1 && anton['dude'] == 1) {
-      document.getElementById("makkerCheck").innerHTML = "Anton er en brolicious dude"
+      document.getElementById("makkerCheck").innerHTML = "Anton er en brolicious dude";
   } else {
-      document.getElementById("makkerCheck").innerHTML = "Anton er IKKE en brolicious dude"
+      document.getElementById("makkerCheck").innerHTML = "Anton er IKKE en brolicious dude";
   };
 }
 
-/* const buttonBro = document.getElementById('buttonBro');
-const buttonDude = document.getElementById('buttonDude'); */
+const buttonBro = document.getElementById("buttonBro");
+const buttonDude = document.getElementById("buttonDude");
 
-buttonBro.onclick = function(){
-  if (anton.bro == 1) {
-    anton.bro = 0;
-    console.log(anton)
-    checkBroDude()
-  } else {
-    anton.bro = 1;
-    console.log(anton)
-    checkBroDude()
+function flipFlop(obj, key, btn) {
+  switch (obj[key]) {
+    case 0:
+      obj[key] = 1;
+      btn.style.backgroundColor = "green";
+      btn.style.color = "white";
+      checkBroDude();
+      break;
+    case 1:
+      obj[key] = 0;
+      btn.style.backgroundColor = "";
+      btn.style.color = "";
+      checkBroDude();
+      break;
+    default:
+      console.log("I don't know what to tell you. I guess you broke the code.");
+      break;
   }
-};
+}
 
-buttonDude.onclick = function(){
-  if (anton.dude == 1) {
-    anton.dude = 0;
-    console.log(anton)
-    checkBroDude()
-  } else {
-    anton.dude = 1;
-    console.log(anton)
-    checkBroDude()
+buttonBro.addEventListener("click", flipFlop.bind(null, anton, Object.keys(anton)[0], buttonBro));
+buttonDude.addEventListener("click", flipFlop.bind(null, anton, Object.keys(anton)[1], buttonDude));
+
+/* buttonBro.onclick = function() {
+  switch (anton.bro) {
+    case 1:
+      anton.bro = 0;
+      console.log(anton);
+      document.getElementById("buttonBro").style.backgroundColor = "";
+      document.getElementById("buttonBro").style.color = "";
+      checkBroDude();
+      break;
+    case 0:
+      anton.bro = 1;
+      console.log(anton);
+      document.getElementById("buttonBro").style.backgroundColor = "green";
+      document.getElementById("buttonBro").style.color = "white";
+      checkBroDude();
+      break;
+    default:
+      console.log("I don't know what to tell you. I guess you broke the code.");
+      break;
   }
-};
+}; */
+
+/* buttonBro.onclick = flipFlop(anton, anton.bro, buttonBro)
+buttonDude.onclick = flipFlop(anton, anton.dude, buttonDude) */
+
 
 /* buttonBro.addEventListener('click', function() {
   changeBro(anton);
